@@ -151,11 +151,7 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
         # Start the runner as a service
         ./svc.sh install
         ./svc.sh start
-      
-   
       }
-    protectedSettings: {
-      script: 'YourCustomScript.sh'
-    }
+    protectedSettings: {}
   }
 }
