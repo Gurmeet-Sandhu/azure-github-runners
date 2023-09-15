@@ -115,7 +115,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
 }
 
 resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
-  name: 'customScript'
+  name: 'myVM/GitHubRunner'
   dependsOn: [
     vm
   ]
