@@ -3,6 +3,10 @@ param adminUsername string
 @secure()
 param adminPassword string
 
+param GITHUB_TOKEN string
+param REPO_OWNER string
+param REPO_NAME string
+
 resource vnet 'Microsoft.Network/virtualNetworks@2019-12-01' = {
   name: 'myVnet'
   location: location
@@ -127,13 +131,6 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
     settings: {
       script: |
         #!/bin/bash
-
-        # Define your GitHub Runner registration token
-        GITHUB_TOKEN="YOUR_GITHUB_RUNNER_TOKEN"
-        
-        # Define the GitHub repository for which you want to register the runner
-        REPO_OWNER="YOUR_USERNAME"
-        REPO_NAME="YOUR_REPOSITORY_NAME"
         
         # Install dependencies
         sudo apt-get update
@@ -149,7 +146,7 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
         tar xzf ./actions-runner-linux-x64-2.289.3.tar.gz
         
         # Configure the runner
-        ./config.sh --url https://github.com/${REPO_OWNER}/${REPO_NAME} --token $GITHUB_TOKEN --labels "your,labels,here" --name "MyRunner" --work "_work"
+        ./config.sh --url https://github.com/${REPO_OWNER}/${REPO_NAME} --token ${GITHUB_TOKEN} 
         
         # Start the runner as a service
         ./svc.sh install
