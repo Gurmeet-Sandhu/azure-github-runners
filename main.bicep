@@ -1,6 +1,7 @@
 param location string = 'uswest2'
 param adminUsername string
-param adminPassword securestring
+@secure()
+param adminPassword string
 
 resource vnet 'Microsoft.Network/virtualNetworks@2019-12-01' = {
   name: 'myVnet'
