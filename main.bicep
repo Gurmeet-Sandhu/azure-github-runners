@@ -132,7 +132,7 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
       fileUris: [
         'https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh'
       ]
-      commandToExecute: 'bash create-latest-svc.sh --name myRunner --labels myRunner --work /home/azureuser/actions-runner/_work --url https://github.com/my-org/my-repo --token my-token'
+      commandToExecute: 'bash create-latest-svc.sh --name githubRunner --labels myRunner --work /home/azureuser/actions-runner/_work --url https://github.com/${REPO_OWNER}/${REPO_NAME} --token ${GITHUB_TOKEN}'
     }
     protectedSettings: {}
   }
