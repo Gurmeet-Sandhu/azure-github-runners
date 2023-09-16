@@ -126,7 +126,7 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
   ]
   properties: {
     publisher: 'Microsoft.Azure.Extensions'
-    type: 'CustomScriptExtension'
+    type: 'CustomScript'
     typeHandlerVersion: '2.1'
     autoUpgradeMinorVersion: true
     settings: {
