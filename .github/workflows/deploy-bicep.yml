@@ -1,0 +1,36 @@
+name: Deploy Bicep to Azure
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+
+env:
+  AZURE_RG: gh-actions-test
+  AZURE_LOCATION: westus2
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: install bicep CLI
+      run: |
+        curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
+        chmod +x ./bicep
+        sudo mv ./bicep /usr/local/bin/bicep
+
+    - name: deploy bicep template
+      run: |
+        az deployment group create --resource-group ${{env.AZURE_RG}} --template-file ./ghrunner.bicep --parameters adminUsername=${{secrets.ADMIN_USERNAME}} adminPassword=${{secrets.ADMIN_PASSWORD}} GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} -s
+
+
