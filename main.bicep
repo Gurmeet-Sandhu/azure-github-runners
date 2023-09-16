@@ -125,33 +125,15 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
   ]
   properties: {
     publisher: 'Microsoft.Azure.Extensions'
-    type: 'CustomScript'
+    type: 'CustomScriptExtension'
     typeHandlerVersion: '2.1'
     autoUpgradeMinorVersion: true
     settings: {
-      script: |
-        #!/bin/bash
-        
-        # Install dependencies
-        sudo apt-get update
-        sudo apt-get install -y git
-        
-        # Download and configure the GitHub Runner
-        mkdir actions-runner && cd actions-runner
-        
-        # Download the GitHub Runner package for Linux
-        curl -O -L https://github.com/actions/runner/releases/latest/download/actions-runner-linux-x64-2.289.3.tar.gz
-        
-        # Extract the runner package
-        tar xzf ./actions-runner-linux-x64-2.289.3.tar.gz
-        
-        # Configure the runner
-        ./config.sh --url https://github.com/${REPO_OWNER}/${REPO_NAME} --token ${GITHUB_TOKEN} 
-        
-        # Start the runner as a service
-        ./svc.sh install
-        ./svc.sh start
-      }
+      fileUris: [
+        'https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh'
+      ]
+      commandToExecute: 'bash create-latest-svc.sh --name myRunner --labels myRunner --work /home/azureuser/actions-runner/_work --url https://github.com/my-org/my-repo --token my-token'
+    }
     protectedSettings: {}
   }
 }
