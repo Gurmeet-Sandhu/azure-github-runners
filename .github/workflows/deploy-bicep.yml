@@ -1,4 +1,4 @@
-name: Build and Publish GitHub Runner module
+name: Deploy Runner Bicep to Azure
 
 on:
   # push:
