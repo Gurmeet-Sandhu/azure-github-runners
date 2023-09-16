@@ -31,5 +31,5 @@ jobs:
 
     - name: build and publish template
       run: |
-        az bicep publish --file ./main.bicep --target br:ghatest.azurecr.io/bicep/modules/gh-runner:v1
+        az bicep publish --file ./main.bicep --target br:ghatest.azurecr.io/bicep/modules/gh-runner:v1 --force
 
