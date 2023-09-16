@@ -31,6 +31,6 @@ jobs:
 
     - name: deploy bicep template
       run: |
-        az deployment group create -g ${{env.AZURE_RG}} -f ghrunner.bicep -p adminUsername=${{secrets.ADMIN_USERNAME}} adminPassword=${{secrets.ADMIN_PASSWORD}} GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} --secure
+        az deployment group create -g ${{env.AZURE_RG}} -f ghrunner.bicep -p adminUsername=${{secrets.ADMIN_USERNAME}} adminPassword=${{secrets.ADMIN_PASSWORD}} GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}
 
 
