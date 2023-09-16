@@ -1,5 +1,3 @@
-@secure()
-@secure()
 param adminUsername string
 @secure()
 param adminPassword string
