@@ -1,4 +1,4 @@
-param location string = 'uswest2'
+param location string = 'westus2'
 param adminUsername string
 @secure()
 param adminPassword string
