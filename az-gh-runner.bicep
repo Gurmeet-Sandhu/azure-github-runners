@@ -7,7 +7,7 @@ param REPO_OWNER string = 'Gurmeet-Sandhu'
 param REPO_NAME string = 'azure-github-runner'
 
 module runner 'br:ghatest.azurecr.io/bicep/modules/gh-runner:v1' = {
-  name: 'gha-runner'
+  name: 'az-gh-runner'
   params: {
     adminUsername: adminUsername
     adminPassword: adminPassword
