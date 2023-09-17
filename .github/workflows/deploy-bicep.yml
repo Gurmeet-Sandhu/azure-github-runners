@@ -31,7 +31,7 @@ jobs:
 
     - name: deploy bicep template
       run: |
-        az deployment cancel --name az-gh-runner --resource-group ${{env.AZURE_RG}}
+        az deployment cancel --name az-gh-runner
         az deployment group create -g ${{env.AZURE_RG}} -f az-gh-runner.bicep -p adminUsername=${{secrets.ADMIN_USERNAME}} adminPassword=${{secrets.ADMIN_PASSWORD}} GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}
 
 
