@@ -79,6 +79,9 @@ resource nic 'Microsoft.Network/networkInterfaces@2019-12-01' = {
         }
       }
     ]
+    networkSecurityGroup: {
+      id: networkSecurityGroup.id
+    }
   }
 }
 

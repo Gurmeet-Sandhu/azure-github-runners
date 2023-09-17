@@ -4,9 +4,9 @@ param adminPassword string
 @secure()
 param GITHUB_TOKEN string
 param REPO_OWNER string = 'Gurmeet-Sandhu'
-param REPO_NAME string = 'azure-github-runner'
+param REPO_NAME string = 'azure-github-runners'
 
-module runner 'br:ghatest.azurecr.io/bicep/modules/gh-runner:v2' = {
+module runner 'br:ghatest.azurecr.io/bicep/modules/gh-runner:v1' = {
   name: 'runner'
   params: {
     adminUsername: adminUsername
