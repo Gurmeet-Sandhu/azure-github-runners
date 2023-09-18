@@ -137,7 +137,7 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
       fileUris: [
         'https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh'
       ]
-      commandToExecute: 'export RUNNER_CFG_PAT=${PAT} && bash create-latest-svc.sh -s ${REPO_OWNER}/${REPO_NAME}'
+      commandToExecute: 'export RUNNER_CFG_PAT=${PAT} && sudo apt-get update && sudo apt-get install jq && bash create-latest-svc.sh -s ${REPO_OWNER}/${REPO_NAME}'
     }
   }
 }
