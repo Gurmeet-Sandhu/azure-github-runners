@@ -2,8 +2,8 @@ param location string = 'westus2'
 param adminUsername string
 @secure()
 param adminPassword string
-
-param GITHUB_TOKEN string
+@secure()
+param PAT string
 param REPO_OWNER string
 param REPO_NAME string
 
@@ -132,12 +132,14 @@ resource extension 'Microsoft.Compute/virtualMachines/extensions@2022-03-01' = {
     type: 'CustomScript'
     typeHandlerVersion: '2.1'
     autoUpgradeMinorVersion: true
-    settings: {
+    settings: {}
+    protectedSettings: {
       fileUris: [
         'https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh'
       ]
-      commandToExecute: 'bash create-latest-svc.sh --name githubRunner --labels myRunner --work /home/azureuser/actions-runner/_work --url https://github.com/${REPO_OWNER}/${REPO_NAME} --token ${GITHUB_TOKEN}'
+      commandToExecute: 'export RUNNER_CFG_PAT=${PAT} && bash create-latest-svc.sh -s ${REPO_OWNER}/${REPO_NAME}'
     }
-    protectedSettings: {}
   }
 }
+
+// bash create-latest-svc.sh --name githubRunner --labels myRunner --work /home/azureuser/actions-runner/_work --url https://github.com/${REPO_OWNER}/${REPO_NAME} --token ${GITHUB_TOKEN}
